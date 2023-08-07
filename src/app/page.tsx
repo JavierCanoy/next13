@@ -7,6 +7,8 @@ import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { useState, CSSProperties } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import Lottie from "lottie-react";
+import animationData from "./assets/animation_ll0al6md.json";
 export default function Home() {
   const override: CSSProperties = {
     display: "block",
@@ -49,6 +51,9 @@ export default function Home() {
       </form>  */}
 
       <div>
+        <div className=" flex justify-center">
+          <Lottie animationData={animationData} className=" h-96 w-96" />
+        </div>
         <p className=" text-center">javier bernadas canoy ! </p>
         <div>
           <Suspense
@@ -197,9 +202,9 @@ export default function Home() {
               //     </g>
               //   </svg>
               // </div>
-              <div class=" mb-20 flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+              <div className=" mb-20 flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
                 <svg
-                  class="w-10 h-10 text-gray-200 dark:text-gray-600"
+                  className="w-10 h-10 text-gray-200 dark:text-gray-600"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
