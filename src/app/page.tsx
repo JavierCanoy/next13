@@ -40,7 +40,6 @@ export default function Home() {
   // };
   return (
     <main>
-      <h1>javier bernadas canoy1 ! </h1>
       {/* <form ref={form} onSubmit={sendEmail}>
         <label>Name</label>
         <input type="text" name="user_name" />
