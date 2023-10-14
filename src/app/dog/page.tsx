@@ -1,15 +1,5 @@
 import React from "react";
 import Image from "next/image";
-// async function getDog() {
-//   const res = await fetch("https://dog.ceo/api/breeds/image/random", {
-//     cache: "no-cache",
-//   });
-
-//   return res.json();
-// }
-// setTimeout(() => {
-//   return res.json();
-// }, 3000); // 3 seconds
 
 const getDog = async () => {
   const res = await fetch("https://dog.ceo/api/breeds/image/random", {
