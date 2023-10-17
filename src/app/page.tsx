@@ -1,12 +1,9 @@
 "use client";
-import Image from "next/image";
 import Users from "./users/page";
 import Dogs from "./dog/page";
 import { Suspense } from "react";
 import React, { useRef } from "react";
-import emailjs from "@emailjs/browser";
 import { useState, CSSProperties } from "react";
-import ClipLoader from "react-spinners/ClipLoader";
 import Lottie from "lottie-react";
 import animationData from "./assets/animation_ll0al6md.json";
 import Link from "next/link";
