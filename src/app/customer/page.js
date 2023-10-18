@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import * as React from "react";
 import { useState } from "react";
 import Box from "@mui/material/Box";
@@ -9,114 +10,133 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import Property from "./property/page" 
-const steps = [
-  {
-    label: "Property Details",
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
-  },
-  {
-    label: "Property Details",
-
-    description:
-      "An ad group contains one or more ads which target a shared set of keywords.",
-  },
-  {
-    label: "Property Details",
-
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-];
-
+import Property from "./property/page";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+import HomeIcon from "@mui/icons-material/Home";
+import PersonIcon from "@mui/icons-material/Person";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import ConstructionIcon from "@mui/icons-material/Construction";
+import steps from "./Pages/page";
 export default function TextMobileStepper() {
+
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = steps.length;
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
   return (
-    <Box
-      sx={{ maxWidth: 400, flexGrow: 1 }}
-      className=" h-screen "
-    >
-      <div className=" h-screen  grid grid-row-3  ">
-        <div >
-            {/* <PropertyDetails/> */}
-          <Paper
-            square
-            elevation={0}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              height: 50,
-              pl: 2,
-              bgcolor: "background.default",
-            }}
-            className=" border-2 rounded-xl py-8 "
-          >
-            <Typography>{steps[activeStep].label}</Typography>
-          </Paper>
-        </div>
-        <Property/>
-        {/* <div>
-          <Box
-            sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}
-            className="   border-2 border-green-600 "
-          >
-            {steps[activeStep].description}
-          </Box>
-        </div> */}
+    <div className=" flex justify-center h-auto">
+      <Box sx={{ maxWidth: 400, flexGrow: 1 }} >
+        <div className=" h-full ">
+          <div>
+            <Paper
+              square
+              elevation={0}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                bgcolor: "background.default",
+              }}
+              className=" border-2 rounded-xl p-5  "
+            >
+              <Typography className=" font-bold text-lg">
+                {steps[activeStep].label}
+              </Typography>
+            </Paper>
+          </div>
+          <div className="rounded-lg my-5 py-5">{steps[activeStep].page }</div>
+          
+          <div className=" mt-14 ">
+            <div className="my-5">
+            {/* // disabled={!isRadioButtonsFilled || activeStep === maxSteps - 1} */}
 
-        <div className="grid content-end   ">
-          <MobileStepper
-            className="border-2  rounded-lg"
-            variant="text"
-            steps={maxSteps}
-            position="static"
-            activeStep={activeStep}
-            nextButton={
-              <Button
-                size="small"
-                onClick={handleNext}
-                disabled={activeStep === maxSteps - 1}
-              >
-                Next
-                {theme.direction === "rtl" ? (
-                  <KeyboardArrowLeft />
-                ) : (
-                  <KeyboardArrowRight />
-                )}
-              </Button>
-            }
-            backButton={
-              <Button
-                size="small"
-                onClick={handleBack}
-                disabled={activeStep === 0}
-              >
-                {theme.direction === "rtl" ? (
-                  <KeyboardArrowRight />
-                ) : (
-                  <KeyboardArrowLeft />
-                )}
-                Back
-              </Button>
-            }
-          />
+              <MobileStepper
+                className="border-2 rounded-lg"
+                variant="text"
+                steps={maxSteps}
+                position="static"
+                activeStep={activeStep}
+                nextButton={
+                  <Button
+                    size="small"
+                    onClick={handleNext}
+                    disabled={activeStep === maxSteps -1 }
+                    
+                  >
+                    {activeStep === maxSteps - 1 ? <Link href="/" className=" text-sm">Book now </Link> : "Next"}
+                    {theme.direction === "rtl" ? (
+                      <KeyboardArrowLeft />
+                    ) : (
+                      <KeyboardArrowRight />
+                    )}
+                  </Button>
+                }
+                backButton={
+                  <Button
+                    size="small"
+                    onClick={handleBack}
+                    disabled={activeStep === 0}
+                  >
+                    {activeStep === maxSteps - 1 ? "Back to idet" : "Prev"}
+                    {theme.direction === "rtl" ? (
+                      <KeyboardArrowRight />
+                    ) : (
+                      <KeyboardArrowLeft />
+                    )}
+                  </Button>
+                }
+              />
+            </div>
+
+            <div className="flex justify-center gap-5 border-2 rounded-lg my-2">
+              <div>
+                <Link className="text-black" href="/provider">
+                  <HomeIcon
+                    className="home w-10 h-10 transform 
+                                transition duration-200 hover:scale-125 active:scale-125  text-blue-500"
+                  />
+                </Link>
+              </div>
+              <div>
+                <Link className="text-black" href="/provider">
+                  <PersonIcon
+                    className="home w-10 h-10  transform 
+                                transition duration-200 hover:scale-125 active:scale-125  text-blue-500 "
+                  />
+                </Link>
+              </div>
+              <div>
+                <Link className="text-black " href="/provider/Services">
+                  <ConstructionIcon
+                    className="home w-10 h-10  transform 
+                                transition duration-200 hover:scale-125 active:scale-125 text-blue-500 "
+                  />
+                </Link>
+              </div>
+              <div>
+                <Link className="text-black" href="/provider">
+                  <CalendarMonthIcon
+                    className="home w-10 h-10 transform 
+                                transition duration-200 hover:scale-125 active:scale-125 text-blue-500 "
+                  />
+                </Link>
+              </div>
+              <div>
+                <Link className="text-black" href="/">
+                  <ArticleOutlinedIcon
+                    className="home w-10 h-10  transform 
+                                transition duration-200 hover:scale-125 active:scale-125 text-blue-500"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </Box>
+      </Box>
+    </div>
   );
 }

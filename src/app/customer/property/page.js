@@ -1,25 +1,29 @@
 "use client";
 import * as React from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 
 export default function ComboBox() {
-  const [yardValue, setYardValue] = React.useState("Yes");
-  const [garageVaue, setGarageVaue] = React.useState("Yes");
-  const [parkingValue, setParkingValue] = React.useState("Yes");
-  const [assistance, setAssistance] = React.useState("Yes");
+  const [yardValue, setYardValue] = useState(null);
+  const [garageVaue, setGarageVaue] = useState(null);
+  const [parkingValue, setParkingValue] = useState(null);
+  const [assistance, setAssistance] = useState(null);
+
+  const [propertyValue, setPropertyValue] = useState("");
+  const [roomValue, setRoomValue] = useState("");
+  const [bathValue, setBathValue] = useState("");
 
   const handleChangeYard = (event) => {
     setYardValue(event.target.value);
   };
   const handleChangeGarage = (event) => {
     setGarageVaue(event.target.value);
+    console.log("setGarageVaue", garageVaue);
   };
   const handleChangePaking = (event) => {
     setParkingValue(event.target.value);
@@ -27,50 +31,71 @@ export default function ComboBox() {
   const handleChangeAssistance = (event) => {
     setAssistance(event.target.value);
   };
+  const handleChangeProperty = (event, newValue) => {
+    console.log("setAssistance", assistance);
+    setPropertyValue(newValue.label);
+  };
+
+  const handleChangeRooms = (event, newValue) => {
+    setRoomValue(newValue.label);
+  };
+  const handleChangeBaths = (event, newValue) => {
+    setBathValue(newValue.label);
+  };
 
   return (
-    <div className=" grid grid-flow-row auto-rows-max ">
-      <div className="Property flex mx-5  gap-5">
-        <label className=" my-auto  ">Property Type</label>
+    <div className=" grid grid-flow-row  ">
+      <div className="Property flex   gap-5 ">
+        <label className=" my-auto  font-semibold">Property Type</label>
         <Autocomplete
+          value={propertyValue}
+          onChange={handleChangeProperty}
           disablePortal
           id="combo-box-demo"
           options={propertyType}
-          sx={{ width: 250 }}
+          sx={{ width: 230 }}
           renderInput={(params) => <TextField {...params} label="Property" />}
-          className=" my-10  flex "
+          className=" my-3  flex "
+          clearIcon={null}
         />
       </div>
 
-      <div className="Rooms flex gap-16  mx-5 ">
-        <label className=" my-auto   ">Room(s)</label>
+      <div className="Rooms flex gap-16   ">
+        <label className=" my-auto  font-semibold ">Room(s)</label>
         <Autocomplete
+          value={roomValue}
+          onChange={handleChangeRooms}
           disablePortal
           id="combo-box-demo-2"
           options={rooms}
-          sx={{ width: 250 }}
+          sx={{ width: 230 }}
           renderInput={(params) => <TextField {...params} label="Rooms" />}
-          className=" my-10 flex "
+          className=" my-3 flex "
+          clearIcon={null}
         />
       </div>
 
-      <div className="Baths flex gap-16  mx-5 ">
+      <div className="Baths flex gap-16   ">
         {/* <label className="flex items-center ">Baths(s)</label> */}
-        <label className="  my-auto  ">Baths(s)</label>
+        <label className="  my-auto  font-semibold">Baths(s)</label>
 
         <Autocomplete
+          value={bathValue}
+          onChange={handleChangeBaths}
           disablePortal
           id="combo-box-demo-2"
           options={baths}
-          sx={{ width: 250 }}
+          sx={{ width: 230 }}
           renderInput={(params) => <TextField {...params} label="Baths" />}
-          className=" my-10  "
+          className=" my-3  "
+          clearIcon={null}
         />
       </div>
+
       {/* radio btn*/}
-      <div className="Backyard grid grid-cols-12 ">
+      <div className="Backyard grid grid-cols-12 mt-5">
         <div className=" grid col-span-6 content-center ">
-          <label className=" mx-5 ">Backyard</label>
+          <label className=" mx-5 font-semibold ">Backyard</label>
         </div>
         <div className="col-span-6">
           <FormControl>
@@ -81,16 +106,16 @@ export default function ComboBox() {
               value={yardValue}
               onChange={handleChangeYard}
             >
-              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="male" control={<Radio />} label="No" />
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
             </RadioGroup>
           </FormControl>
         </div>
       </div>
 
-      <div className="Garage Backyard grid grid-cols-12 " >
+      <div className="Garage Backyard grid grid-cols-12 ">
         <div className=" grid col-span-6 content-center ">
-          <label className="mx-5 ">Garage</label>
+          <label className="mx-5 font-semibold ">Garage</label>
         </div>
         <div className="col-span-6">
           <FormControl>
@@ -101,8 +126,8 @@ export default function ComboBox() {
               value={garageVaue}
               onChange={handleChangeGarage}
             >
-              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="male" control={<Radio />} label="No" />
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
             </RadioGroup>
           </FormControl>
         </div>
@@ -110,7 +135,7 @@ export default function ComboBox() {
 
       <div className="Parking    grid grid-cols-12">
         <div className=" grid col-span-6 content-center ">
-          <label className="mx-5 ">Parking</label>
+          <label className="mx-5  font-semibold">Parking</label>
         </div>
         <div className="col-span-6">
           <FormControl>
@@ -121,8 +146,8 @@ export default function ComboBox() {
               value={parkingValue}
               onChange={handleChangePaking}
             >
-              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="male" control={<Radio />} label="No" />
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
             </RadioGroup>
           </FormControl>
         </div>
@@ -130,10 +155,12 @@ export default function ComboBox() {
 
       <div className="Assistance  grid grid-cols-12">
         <div className=" grid col-span-6 content-center">
-          <label className="mx-5 ">Assistance</label>
+          <label className="mx-5  font-semibold">
+            Assistance <br /> in Moving <br /> Objects?
+          </label>
         </div>
         <div className="col-span-6 ">
-          <FormControl >
+          <FormControl>
             <RadioGroup
               row
               aria-labelledby="demo-controlled-radio-buttons-group"
@@ -141,8 +168,8 @@ export default function ComboBox() {
               value={assistance}
               onChange={handleChangeAssistance}
             >
-              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="male" control={<Radio />} label="No" />
+              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="No" control={<Radio />} label="No" />
             </RadioGroup>
           </FormControl>
         </div>
@@ -151,7 +178,6 @@ export default function ComboBox() {
   );
 }
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const propertyType = [
   { id: 1, label: "House" },
   { id: 2, label: "Office" },
