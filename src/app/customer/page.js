@@ -10,27 +10,45 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import Property from "./property/page";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ConstructionIcon from "@mui/icons-material/Construction";
-import steps from "./Pages/page";
-export default function TextMobileStepper() {
 
-  const theme = useTheme();
+import Javier from "./javier/page";
+import Canoy from "./canoy/page";
+import Property from "./property/page";
+import ScopeOfServices from "./scopeOfServices/page";
+
+export default function TextMobileStepper() {
+  const label = ["Javier", "Canoy", "Property", "ScopeOfServices"];
+  const [ formData , setFormData ] = useState({ username: "", password: "",})
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = steps.length;
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  const maxSteps = label.length;
+
+  const pageDisplay = () => {
+    if (activeStep === 0) {
+      return  <div> <Javier /></div>;
+    } else if (activeStep === 1) {
+      return  <div><Canoy formData={formData} setFormData={setFormData} /></div>;
+    } else if (activeStep === 2) {
+      return   <div><Property /></div>;
+    } else if (activeStep === 3) {
+      return  <div><ScopeOfServices /></div>;
+    }
   };
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+
+  // const handleNext = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   console.log(label[activeStep])
+  // };
+  // const handleBack = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  // };
   return (
     <div className=" flex justify-center h-auto">
-      <Box sx={{ maxWidth: 400, flexGrow: 1 }} >
+      <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
         <div className=" h-full ">
           <div>
             <Paper
@@ -44,17 +62,22 @@ export default function TextMobileStepper() {
               className=" border-2 rounded-xl p-5  "
             >
               <Typography className=" font-bold text-lg">
-                {steps[activeStep].label}
+                {/* {steps[activeStep].label} */}
+                {label[activeStep]}
               </Typography>
             </Paper>
           </div>
-          <div className="rounded-lg my-5 py-5">{steps[activeStep].page }</div>
-          
+          {/* <div className="rounded-lg my-5 py-5">{steps[activeStep].page }</div> */}
+          <div className="rounded-lg my-5 py-5">
+            <h2>{pageDisplay()}</h2>
+          </div>
+
+
           <div className=" mt-14 ">
             <div className="my-5">
-            {/* // disabled={!isRadioButtonsFilled || activeStep === maxSteps - 1} */}
+              {/* // disabled={!isRadioButtonsFilled || activeStep === maxSteps - 1} */}
 
-              <MobileStepper
+              {/* <MobileStepper
                 className="border-2 rounded-lg"
                 variant="text"
                 steps={maxSteps}
@@ -89,7 +112,29 @@ export default function TextMobileStepper() {
                     )}
                   </Button>
                 }
-              />
+              /> */}
+
+              <div className="border-2 rounded-lg">
+                <button
+                  className=" mx-20"
+                  disabled={activeStep == 0}
+                  onClick={() => {
+                    setActiveStep((currentPage) => currentPage - 1);
+                  }}
+                >
+                  Prev
+                </button>
+
+                <button
+                  className=" mx-20"
+                  disabled={activeStep == maxSteps - 1}
+                  onClick={() => {
+                    setActiveStep((currentPage) => currentPage + 1);
+                  }}
+                >
+                  Next
+                </button>
+              </div>
             </div>
 
             <div className="flex justify-center gap-5 border-2 rounded-lg my-2">
